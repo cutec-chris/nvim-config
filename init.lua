@@ -1,6 +1,6 @@
 --sudo pacman -S python-pynvim xclip
 
-vim.api.nvim_set_keymap("n", "<C-x>", ":qa<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<C-x>", ":NvimTreeClose<CR>::qa<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<C-s>", ":w<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<C-t>", ":below split | resize10 | terminal<CR>i<CR>", { noremap = true, silent = true })
 vim.g.vimspector_enable_mappings = 'HUMAN'
@@ -35,6 +35,7 @@ require('packer').startup(function(use)
   use "nvim-telescope/telescope.nvim"
   use "nvim-tree/nvim-tree.lua"
   use "akinsho/bufferline.nvim"
+  use "ibhagwan/fzf-lua"
 
   -- Statusleiste und Git-Integration
   use "nvim-lualine/lualine.nvim"
@@ -56,7 +57,7 @@ else
 end
 local status_ok, nvim_bf = pcall(require, "bufferline")
 if not status_ok then
- -- Nvim-Tree ist nicht installiert, mache nichts
+ -- Bufferline ist nicht installiert, mache nichts
 else
  nvim_bf.setup({
  -- Konfiguration für Nvim Buffer
