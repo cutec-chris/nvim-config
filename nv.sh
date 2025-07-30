@@ -9,5 +9,5 @@ docker build -t "$IMAGE_NAME" "$SCRIPT_DIR"
 # Aktuellen Ordner als /app mounten und Neovim-Cache mounten
 docker run -it --rm \
  -v "$(pwd):/app" \
- -v "$SCRIPT_DIR/nvim-cache:/root/.local/share/nvim/site/pack" \
+ -v "$HOME/.cache/nvim_cache:/root/.local/share/nvim/site/pack" \
  "$IMAGE_NAME" nvim
