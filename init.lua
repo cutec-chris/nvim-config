@@ -1,4 +1,4 @@
-#sudo pacman -S python-pynvim
+#sudo pacman -S python-pynvim xclip
 
 vim.api.nvim_set_keymap("n", "<C-x>", ":qa<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<C-s>", ":w<CR>", { noremap = true, silent = true })
@@ -22,22 +22,6 @@ local packer_bootstrap = ensure_packer()
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.opt.termguicolors = true
-vim.api.nvim_set_keymap("n", "<C-n>", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
-
-require("nvim-tree").setup({
-  sort = {
-    sorter = "case_sensitive",
-  },
-  view = {
-    width = 30,
-  },
-  renderer = {
-    group_empty = true,
-  },
-  filters = {
-    dotfiles = true,
-  },
-})
 
 require('packer').startup(function(use)
  use 'wbthomason/packer.nvim'
@@ -59,3 +43,6 @@ require('packer').startup(function(use)
  require('packer').sync()
  end
 end)
+
+vim.api.nvim_set_keymap("n", "<C-n>", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
+require("nvim-tree").setup()
