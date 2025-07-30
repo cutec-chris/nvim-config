@@ -1,4 +1,4 @@
-#sudo pacman -S python-pynvim xclip
+--sudo pacman -S python-pynvim xclip
 
 vim.api.nvim_set_keymap("n", "<C-x>", ":qa<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<C-s>", ":w<CR>", { noremap = true, silent = true })
@@ -45,4 +45,11 @@ require('packer').startup(function(use)
 end)
 
 vim.api.nvim_set_keymap("n", "<C-n>", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
-require("nvim-tree").setup()
+local status_ok, nvim_tree = pcall(require, "nvim-tree")
+if not status_ok then
+ -- Nvim-Tree ist nicht installiert, mache nichts
+else
+ nvim_tree.setup({
+ -- Konfiguration für Nvim-Tree
+ })
+end
