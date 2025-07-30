@@ -1,3 +1,7 @@
+#sudo pacman -S python-pynvim
+
+vim.g.vimspector_enable_mappings = 'HUMAN'
+
 local ensure_packer = function()
  local fn = vim.fn
  local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
