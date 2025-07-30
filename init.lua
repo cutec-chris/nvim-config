@@ -34,6 +34,7 @@ require('packer').startup(function(use)
   -- Datei- und Projektmanagement
   use "nvim-telescope/telescope.nvim"
   use "nvim-tree/nvim-tree.lua"
+  use "akinsho/bufferline.nvim"
 
   -- Statusleiste und Git-Integration
   use "nvim-lualine/lualine.nvim"
@@ -53,12 +54,20 @@ else
  -- Konfiguration für Nvim-Tree
  })
 end
+local status_ok, nvim_bf = pcall(require, "bufferline")
+if not status_ok then
+ -- Nvim-Tree ist nicht installiert, mache nichts
+else
+ nvim_bf.setup({
+ -- Konfiguration für Nvim Buffer
+ })
+end
 vim.api.nvim_create_autocmd({ "VimEnter" }, {
  callback = function()
  local bufnr = vim.api.nvim_get_current_buf()
  local bufname = vim.api.nvim_buf_get_name(bufnr)
  if bufname == "" or bufname == vim.fn.getcwd() then
- vim.cmd "NvimTreeOpen"
+   vim.cmd "NvimTreeOpen"
  end
  end,
 })
