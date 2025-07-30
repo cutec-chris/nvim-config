@@ -2,6 +2,7 @@
 
 vim.api.nvim_set_keymap("n", "<C-x>", ":qa<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<C-s>", ":w<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<C-t>", ":below split | resize10 | terminal<CR>i<CR>", { noremap = true, silent = true })
 vim.g.vimspector_enable_mappings = 'HUMAN'
 
 local ensure_packer = function()
