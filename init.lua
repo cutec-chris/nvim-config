@@ -53,3 +53,12 @@ else
  -- Konfiguration für Nvim-Tree
  })
 end
+vim.api.nvim_create_autocmd({ "VimEnter" }, {
+ callback = function()
+ local bufnr = vim.api.nvim_get_current_buf()
+ local bufname = vim.api.nvim_buf_get_name(bufnr)
+ if bufname == "" or bufname == vim.fn.getcwd() then
+ vim.cmd "NvimTreeOpen"
+ end
+ end,
+})
