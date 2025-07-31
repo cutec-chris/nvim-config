@@ -3,7 +3,9 @@
 vim.api.nvim_set_keymap("n", "<C-x>", ":NvimTreeClose<CR>::qa<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<C-s>", ":w<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<C-t>", ":below split | resize10 | terminal<CR>i<CR>", { noremap = true, silent = true })
-vim.g.vimspector_enable_mappings = 'HUMAN'
+vim.api.nvim_set_keymap("v", "<C-c>", '"+y | call system("xclip -selection clipboard", @")', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<C-v>", '"+p', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<C-k>", "dd", { noremap = true, silent = true })
 
 local ensure_packer = function()
  local fn = vim.fn
@@ -46,23 +48,25 @@ require('packer').startup(function(use)
  end
 end)
 
+local function plugin_available(plugin_name)
+ local status_ok, _ = pcall(require, plugin_name)
+ return status_ok
+end
+
 vim.api.nvim_set_keymap("n", "<C-n>", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
-local status_ok, nvim_tree = pcall(require, "nvim-tree")
-if not status_ok then
- -- Nvim-Tree ist nicht installiert, mache nichts
-else
- nvim_tree.setup({
+
+if plugin_available("nvim-tree") then
+ require("nvim-tree").setup({
  -- Konfiguration für Nvim-Tree
  })
 end
-local status_ok, nvim_bf = pcall(require, "bufferline")
-if not status_ok then
- -- Bufferline ist nicht installiert, mache nichts
-else
- nvim_bf.setup({
+
+if plugin_available("bufferline") then
+ require("bufferline").setup({
  -- Konfiguration für Nvim Buffer
  })
 end
+
 vim.api.nvim_create_autocmd({ "VimEnter" }, {
  callback = function()
  local bufnr = vim.api.nvim_get_current_buf()
