@@ -8,5 +8,3 @@ COPY . /root/.config/nvim
 RUN mkdir /app
 RUN git config --global --add safe.directory /app
 WORKDIR /app
-# Neovim starten (optional)
-# CMD ["nvim"]
