@@ -59,6 +59,15 @@ if plugin_available("nvim-tree") then
  require("nvim-tree").setup({
  -- Konfiguration für Nvim-Tree
  })
+ vim.api.nvim_create_autocmd({ "VimEnter" }, {
+  callback = function()
+  local bufnr = vim.api.nvim_get_current_buf()
+  local bufname = vim.api.nvim_buf_get_name(bufnr)
+  if bufname == "" or bufname == vim.fn.getcwd() then
+    vim.cmd "NvimTreeOpen"
+  end
+ end,
+})
 end
 
 if plugin_available("bufferline") then
@@ -66,13 +75,3 @@ if plugin_available("bufferline") then
  -- Konfiguration für Nvim Buffer
  })
 end
-
-vim.api.nvim_create_autocmd({ "VimEnter" }, {
- callback = function()
- local bufnr = vim.api.nvim_get_current_buf()
- local bufname = vim.api.nvim_buf_get_name(bufnr)
- if bufname == "" or bufname == vim.fn.getcwd() then
-   vim.cmd "NvimTreeOpen"
- end
- end,
-})
