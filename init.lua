@@ -7,6 +7,18 @@ vim.api.nvim_set_keymap("v", "<C-c>", '"+y | call system("xclip -selection clipb
 vim.api.nvim_set_keymap("n", "<C-v>", '"+p', { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<C-k>", "dd", { noremap = true, silent = true })
 
+vim.g.clipboard = {
+  name = 'OSC 52',
+  copy = {
+    ['+'] = require('vim.ui.clipboard.osc52').copy '+',
+    ['*'] = require('vim.ui.clipboard.osc52').copy '*',
+  },
+  paste = {
+    ['+'] = require('vim.ui.clipboard.osc52').paste '+',
+    ['*'] = require('vim.ui.clipboard.osc52').paste '*',
+  },
+}
+
 local ensure_packer = function()
  local fn = vim.fn
  local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
